@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AirLift O₂ — Lines Up. Risks Down.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a2a5e;
+    --blue: #1a6fc4;
+    --cyan: #29b6f6;
+    --light-cyan: #e3f5fd;
+    --ice: #f4fafe;
+    --white: #ffffff;
+    --gray-100: #f7f8fa;
+    --gray-200: #e8ecf1;
+    --gray-400: #9aa5b4;
+    --gray-600: #5a6577;
+    --gray-800: #2d3748;
+    --font-display: 'Outfit', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--gray-800);
+    background: var(--white);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ---- NAV ---- */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--gray-200);
+    transition: box-shadow 0.3s;
+  }
+  nav.scrolled { box-shadow: 0 2px 24px rgba(10,42,94,0.08); }
+  .nav-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 24px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-logo img { height: 42px; }
+  .nav-links { display: flex; gap: 32px; align-items: center; }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--gray-600);
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-links .btn-nav {
+    background: var(--navy);
+    color: var(--white);
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .nav-links .btn-nav:hover { background: var(--blue); transform: translateY(-1px); }
+
+  .mobile-toggle {
+    display: none;
+    background: none; border: none; cursor: pointer;
+    width: 32px; height: 32px;
+    flex-direction: column; justify-content: center; align-items: center; gap: 5px;
+  }
+  .mobile-toggle span {
+    display: block; width: 22px; height: 2px; background: var(--navy);
+    border-radius: 2px; transition: all 0.3s;
+  }
+
+  /* ---- BRAND NAME ---- */
+  .brand { font-family: var(--font-display); font-weight: 400; white-space: nowrap; letter-spacing: -0.02em; }
+  .brand-air { color: #004aad; }
+  .brand-o2 { color: #38b6ff; }
+  .brand-light .brand-air { color: #fff; }
+  .brand-light .brand-o2 { color: #38b6ff; }
+
+  /* ---- HERO ---- */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 24px 80px;
+    position: relative;
+    background: linear-gradient(170deg, var(--white) 0%, var(--ice) 50%, var(--light-cyan) 100%);
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -40%; right: -20%;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(41,182,246,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -30%; left: -10%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(10,42,94,0.05) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+  }
+  .hero-logo {
+    width: 322px;
+    margin-bottom: 32px;
+    animation: fadeUp 0.8s ease-out both;
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 5.5vw, 3.8rem);
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.15;
+    margin-bottom: 20px;
+    letter-spacing: -0.02em;
+    animation: fadeUp 0.8s ease-out 0.15s both;
+  }
+  .hero h1 span { color: var(--cyan); }
+  .hero p {
+    font-size: 1.15rem;
+    color: var(--gray-600);
+    max-width: 520px;
+    margin: 0 auto 36px;
+    line-height: 1.7;
+    animation: fadeUp 0.8s ease-out 0.3s both;
+  }
+  .hero-cta {
+    display: inline-flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    animation: fadeUp 0.8s ease-out 0.45s both;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 14px 32px;
+    border-radius: 10px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: all 0.25s ease;
+  }
+  .btn-primary {
+    background: var(--navy);
+    color: var(--white);
+    box-shadow: 0 4px 16px rgba(10,42,94,0.2);
+  }
+  .btn-primary:hover {
+    background: var(--blue);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(10,42,94,0.25);
+  }
+  .btn-secondary {
+    background: var(--white);
+    color: var(--navy);
+    border: 2px solid var(--gray-200);
+  }
+  .btn-secondary:hover {
+    border-color: var(--cyan);
+    color: var(--blue);
+    transform: translateY(-2px);
+  }
+
+  /* ---- SECTIONS ---- */
+  section { padding: 100px 24px; }
+  .container { max-width: 1120px; margin: 0 auto; overflow: visible; }
+
+  .section-label {
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.2;
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+  }
+  .section-sub {
+    font-size: 1.05rem;
+    color: var(--gray-600);
+    max-width: 560px;
+    line-height: 1.7;
+  }
+
+  /* ---- PROBLEM ---- */
+  .problem { background: var(--white); }
+  .problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .problem-text .section-sub { margin-bottom: 28px; }
+  .stat-row { display: flex; gap: 40px; margin-top: 8px; }
+  .stat {
+    text-align: left;
+  }
+  .stat-number {
+    font-family: var(--font-display);
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1.1;
+  }
+  .stat-label {
+    font-size: 0.85rem;
+    color: var(--gray-400);
+    margin-top: 4px;
+    line-height: 1.4;
+  }
+  .problem-visual {
+    position: relative;
+    background: var(--ice);
+    border-radius: 20px;
+    padding: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 340px;
+    overflow: hidden;
+  }
+  .problem-visual .hazard-icon {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  /* ---- HOW IT WORKS ---- */
+  .how-it-works { background: var(--ice); }
+  .how-header { text-align: center; margin-bottom: 64px; }
+  .how-header .section-sub { margin: 0 auto; }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    position: relative;
+  }
+  .step {
+    text-align: center;
+    padding: 40px 28px;
+    background: var(--white);
+    border-radius: 16px;
+    position: relative;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .step:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(10,42,94,0.08);
+  }
+  .step-number {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--light-cyan);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+  .step-icon {
+    width: 56px; height: 56px;
+    margin: 0 auto 20px;
+    background: var(--light-cyan);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .step-icon svg { width: 28px; height: 28px; color: var(--blue); }
+  .step h3 {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+  .step p {
+    font-size: 0.95rem;
+    color: var(--gray-600);
+    line-height: 1.6;
+  }
+
+  /* ---- BENEFITS ---- */
+  .benefits { background: var(--white); }
+  .benefits-header { text-align: center; margin-bottom: 64px; }
+  .benefits-header .section-sub { margin: 0 auto; }
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  .benefit-card {
+    padding: 36px;
+    border-radius: 16px;
+    border: 1px solid var(--gray-200);
+    background: var(--white);
+    transition: all 0.25s;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  .benefit-card:hover {
+    border-color: var(--cyan);
+    box-shadow: 0 8px 32px rgba(41,182,246,0.08);
+    transform: translateY(-2px);
+  }
+  .benefit-icon {
+    flex-shrink: 0;
+    width: 48px; height: 48px;
+    background: var(--light-cyan);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .benefit-icon svg { width: 24px; height: 24px; color: var(--blue); }
+  .benefit-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .benefit-card p {
+    font-size: 0.92rem;
+    color: var(--gray-600);
+    line-height: 1.6;
+  }
+
+  /* ---- OUR STORY ---- */
+  .story { background: var(--navy); position: relative; overflow: hidden; }
+  .story-video {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: 0.25;
+  }
+  .story::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(
+      180deg,
+      rgba(10, 26, 54, 0.6) 0%,
+      rgba(10, 26, 54, 0.4) 50%,
+      rgba(10, 26, 54, 0.7) 100%
+    );
+  }
+  .story-inner {
+    max-width: 680px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+  .story-inner .section-label { margin-bottom: 12px; color: var(--cyan); }
+  .story-inner .section-title { margin-bottom: 24px; color: var(--white); }
+  .story-body {
+    text-align: left;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.8);
+  }
+  .story-body p { margin-bottom: 20px; }
+  .story-body p:last-child { margin-bottom: 0; }
+  .story-signature {
+    margin-top: 36px;
+    text-align: left;
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    color: var(--white);
+    font-weight: 600;
+  }
+  .story-signature > span {
+    display: block;
+    font-weight: 400;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.6);
+    margin-top: 2px;
+  }
+
+  /* ---- PRODUCT ---- */
+  .product {
+    background: linear-gradient(175deg, var(--navy) 0%, #0d3a7a 100%);
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+  }
+  .product::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(41,182,246,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .product-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 48px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+  .product .section-label { color: var(--cyan); }
+  .product .section-title { color: var(--white); }
+  .product .section-sub { color: rgba(255,255,255,0.7); }
+  .spec-list {
+    list-style: none;
+    margin-top: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .spec-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.85);
+  }
+  .spec-list li svg {
+    width: 20px; height: 20px;
+    color: var(--cyan);
+    flex-shrink: 0;
+  }
+  .product-visual {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .product-visual img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    border-radius: 12px;
+  }
+  .product-placeholder {
+    text-align: center;
+    color: rgba(255,255,255,0.4);
+    font-size: 0.9rem;
+  }
+  .product-placeholder svg {
+    width: 80px; height: 80px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+  }
+
+  /* ---- QUOTE FORM ---- */
+  .quote-form {
+    max-width: 560px;
+    margin: 32px auto 0;
+    text-align: left;
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .form-group {
+    margin-bottom: 16px;
+  }
+  .form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #d0d7e2;
+    border-radius: 10px;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--navy);
+    background: var(--white);
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    outline: none;
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(26,111,196,0.12);
+  }
+  .form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  .form-submit {
+    text-align: center;
+    margin-top: 24px;
+  }
+  .form-note {
+    font-size: 0.8rem;
+    color: #9aa5b4;
+    margin-top: 12px;
+    text-align: center;
+  }
+
+  /* ---- CTA ---- */
+  .cta-section {
+    background: var(--ice);
+    text-align: center;
+  }
+  .cta-box {
+    max-width: 620px;
+    margin: 0 auto;
+  }
+  .cta-box .section-title { margin-bottom: 16px; }
+  .cta-box p {
+    color: var(--gray-600);
+    font-size: 1.05rem;
+    margin-bottom: 32px;
+    line-height: 1.7;
+  }
+  .contact-row {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 24px;
+  }
+  .contact-detail {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--gray-600);
+    font-size: 0.95rem;
+  }
+  .contact-detail svg { width: 18px; height: 18px; color: var(--cyan); }
+  .contact-detail a {
+    color: var(--gray-600);
+    text-decoration: none;
+  }
+  .contact-detail a:hover { color: var(--navy); }
+
+  /* ---- FOOTER ---- */
+  footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.5);
+    padding: 40px 24px;
+    text-align: center;
+    font-size: 0.85rem;
+  }
+  footer a { color: rgba(255,255,255,0.7); text-decoration: none; }
+  footer a:hover { color: var(--white); }
+
+  /* ---- ANIMATIONS ---- */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 900px) {
+    .problem-grid,
+    .product-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .steps {
+      grid-template-columns: 1fr;
+      max-width: 440px;
+      margin: 0 auto;
+    }
+    .benefits-grid {
+      grid-template-columns: 1fr;
+    }
+    .stat-row { gap: 24px; }
+    .how-it-works [style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
+    .photo-card-row [style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
+  }
+
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+    .mobile-toggle { display: flex; }
+    .hero { padding: 100px 20px 60px; min-height: auto; }
+    .hero-logo { width: 242px; }
+    section { padding: 72px 20px; }
+    .stat-row { flex-direction: column; gap: 20px; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+
+  .how-photos {
+    margin-top: 56px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 16px 48px rgba(10,42,94,0.1);
+    max-width: 1120px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .how-photo {
+    position: relative;
+    overflow: hidden;
+  }
+  .how-photo img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    display: block;
+  }
+  .how-photo-label {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 16px 24px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.55));
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  @media (max-width: 900px) {
+    .how-photos { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <img src="images/logo-nav.svg" alt="AirLift O2">
+    </div>
+    <div class="nav-links">
+      <a href="#problem">The Problem</a>
+      <a href="#how">How It Works</a>
+      <a href="#benefits">Benefits</a>
+      <a href="#story">Our Story</a>
+      <a href="#product">Product</a>
+      <a href="#contact" class="btn-nav">Get a Quote</a>
+    </div>
+    <button class="mobile-toggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <img src="images/logo-hero.svg" alt="AirLift O2" class="hero-logo">
+    <h1>Lines Up. <span>Risks Down.</span></h1>
+    <p>A ceiling-mounted track system that keeps medical oxygen lines off the floor — reducing trip-and-fall hazards in clinical and home-care environments.</p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn btn-primary">Get a Quote</a>
+      <a href="#how" class="btn btn-secondary">See How It Works</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem" id="problem">
+  <div class="container">
+    <div class="problem-grid">
+      <div class="problem-text reveal">
+        <div class="section-label">The Problem</div>
+        <h2 class="section-title">Oxygen lines on the floor are a fall waiting to happen.</h2>
+        <p class="section-sub">In hospitals, clinics, and home-care settings, supplemental oxygen tubing drapes across floors and doorways. The people connected to those lines can least afford a fall.</p>
+        <div class="stat-row">
+          <div class="stat">
+            <div class="stat-number">800K+</div>
+            <div class="stat-label">Hospitalizations per year<br>from fall injuries (CDC)</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">#1</div>
+            <div class="stat-label">Cause of injury<br>among older adults</div>
+          </div>
+        </div>
+      </div>
+      <div class="problem-visual-stack reveal">
+        <div class="problem-visual" style="margin-bottom:0; border-radius:20px 20px 0 0;">
+          <svg class="hazard-icon" viewBox="0 0 300 260" fill="none">
+            <rect x="0" y="220" width="300" height="4" rx="2" fill="#e8ecf1"/>
+            <path d="M20 218 C60 200, 80 230, 120 215 S180 195, 200 218 S260 235, 280 218" stroke="#29b6f6" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.4"/>
+            <path d="M40 222 C70 210, 100 235, 140 220 S190 200, 220 222" stroke="#29b6f6" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.3"/>
+            <g transform="translate(110, 40)">
+              <path d="M40 0 L80 70 L0 70 Z" fill="none" stroke="#1a6fc4" stroke-width="4" stroke-linejoin="round"/>
+              <text x="40" y="55" text-anchor="middle" font-family="Outfit, sans-serif" font-weight="800" font-size="36" fill="#0a2a5e">!</text>
+            </g>
+            <g transform="translate(175, 100)" opacity="0.7">
+              <circle cx="20" cy="10" r="12" stroke="#0a2a5e" stroke-width="3" fill="none"/>
+              <line x1="20" y1="22" x2="15" y2="62" stroke="#0a2a5e" stroke-width="3" stroke-linecap="round"/>
+              <line x1="15" y1="62" x2="0" y2="100" stroke="#0a2a5e" stroke-width="3" stroke-linecap="round"/>
+              <line x1="15" y1="62" x2="35" y2="95" stroke="#0a2a5e" stroke-width="3" stroke-linecap="round"/>
+              <line x1="20" y1="38" x2="0" y2="50" stroke="#0a2a5e" stroke-width="3" stroke-linecap="round"/>
+              <line x1="20" y1="38" x2="45" y2="30" stroke="#0a2a5e" stroke-width="3" stroke-linecap="round"/>
+            </g>
+          </svg>
+        </div>
+        <div style="overflow:hidden; border-radius:0 0 20px 20px;">
+          <img class="problem-photo" src="images/problem-floor-tubing.jpg" alt="Oxygen tubing draped across floor — a trip hazard" style="width:100%; display:block; object-fit:cover; max-height:280px;">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-it-works" id="how">
+  <div class="container">
+    <div class="how-header reveal">
+      <div class="section-label">How It Works</div>
+      <h2 class="section-title">Simple to install. Simple to use.</h2>
+      <p class="section-sub"><span class="brand"><span class="brand-air">airlift</span> <span class="brand-o2">O₂</span></span> uses a lightweight ceiling track — similar to a curtain rail — to route oxygen tubing overhead and completely off the floor.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 3h18v18H3z"/><path d="M12 8v8M8 12h8"/></svg>
+        </div>
+        <h3>Mount the Track</h3>
+        <p>Secure the lightweight rail to the ceiling along the desired path. A drill and a few minutes — that's it.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+        </div>
+        <h3>Load the Carriers</h3>
+        <p>Slide the carriers onto the track. They move freely so the line travels with the patient — room to room, bed to bath.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <h3>Done. Floor Clear.</h3>
+        <p>Tubing runs overhead along the track. No more lines on the floor, no more trip hazards. Patients and caregivers move freely.</p>
+      </div>
+
+    
+    </div>
+  </div>
+
+  <div class="how-photos reveal">
+    <div class="how-photo">
+      <img src="images/how-coiled.jpg" alt="AirLift O2 tubing gathered at glider">
+      <div class="how-photo-label">Tubing gathers neatly when stationary</div>
+    </div>
+    <div class="how-photo">
+      <img src="images/how-extended.jpg" alt="AirLift O2 tubing spread along track">
+      <div class="how-photo-label">Tubing extends as the patient moves</div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="benefits" id="benefits">
+  <div class="container">
+    <div class="benefits-header reveal">
+      <div class="section-label">Benefits</div>
+      <h2 class="section-title">Better for patients. Better for everyone.</h2>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-card reveal">
+        <div class="benefit-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div>
+          <h3>Eliminates a Leading Fall Hazard</h3>
+          <p>Tubing goes from floor to ceiling — removing the trip risk entirely, not just managing it.</p>
+        </div>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="benefit-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div>
+          <h3>Full Freedom of Movement</h3>
+          <p>Carriers slide along the track as the patient moves — room to room, bed to bath — without tangles or restriction.</p>
+        </div>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="benefit-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        </div>
+        <div>
+          <h3>Easy Installation</h3>
+          <p>No electrician, no contractor. Mount the track, load the carriers, done. Installs in minutes with a standard drill.</p>
+        </div>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="benefit-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg>
+        </div>
+        <div>
+          <h3>Works With Standard Tubing</h3>
+          <p>No proprietary connectors. Compatible with standard medical oxygen tubing right out of the box.</p>
+        </div>
+      </div>
+      <div class="benefit-card reveal">
+        <div class="benefit-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div>
+          <h3>Fits Any Setting</h3>
+          <p>Hospitals, long-term care, or a spare bedroom at home. Low-profile design blends in. Durable, easy to clean, built to last.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OUR STORY -->
+<section class="story" id="story">
+  <video class="story-video" autoplay muted loop playsinline poster="images/story-poster.jpg">
+    <source src="images/story-bg.mp4" type="video/mp4">
+  </video>
+  <div class="container">
+    <div class="story-inner reveal">
+      <div class="section-label">Our Story</div>
+      <h2 class="section-title">It started with Sharon.</h2>
+      <div class="story-body">
+        <p>When my mother-in-law, Sharon, was put on supplemental oxygen after contracting COVID, we became her caregivers. She had COPD, severe scoliosis, chronic pain — and a stubbornness about staying on her feet that scared the heck out of us. She was remarkably agile navigating the tubing around the house, but we were still afraid to leave her home alone. One trip, one fall, and everything changes for someone in her condition.</p>
+        <p>My wife Tracy and I started looking for anything that could get the tubing off the floor. What we found was either nonexistent or impractical — retractable reels with remote controls, self-winding gadgets, devices that put something else in the patient's hands. Anyone who has cared for someone aging or ill knows the problem with that: they'll fixate on the device instead of where they're walking, and you've just traded one fall hazard for another.</p>
+        <p>So we started simple. Camping line and eye bolts screwed into the ceiling. It was ugly, but it worked — and it told us the idea was right. From there, we kept refining: a smooth track, sliding carriers, fixed attachment points that let the tubing glide overhead and spring back into shape like a slinky. No gadgets. No batteries. Nothing to hold or think about.</p>
+        <p>Sharon was our first believer. She's the one who told us, again and again, to get this out into the world. A lot of people could benefit from it, she said. So that's what we're doing.</p>
+      </div>
+      <div class="story-signature">
+        — Abe &amp; Tracy
+        <span>Founders, <span class="brand brand-light"><span class="brand-air">airlift</span> <span class="brand-o2">O₂</span></span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT -->
+<section class="product" id="product">
+  <div class="container">
+    <div class="product-grid">
+      <div class="reveal">
+        <div class="section-label">The Product</div>
+        <h2 class="section-title">Everything you need in one kit.</h2>
+        <p class="section-sub"><span class="brand brand-light"><span class="brand-air">airlift</span> <span class="brand-o2">O₂</span></span> ships as a complete, ready-to-install kit. No extra trips to the hardware store.</p>
+        <ul class="spec-list">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Ceiling-mount track rail (multiple lengths available)
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Sliding carriers
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Mounting brackets and hardware
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Installation guide
+          </li>
+        </ul>
+        <p style="margin-top:20px; font-size:0.82rem; color:rgba(255,255,255,0.45); font-style:italic;">Patent Pending</p>
+      </div>
+      <div class="product-visual reveal">
+        <img src="images/product-blueprint.png" alt="AirLift O2 Track System Blueprint" style="width:100%; border-radius:12px;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="container">
+    <div class="cta-box reveal">
+      <div class="section-label">Get Started</div>
+      <h2 class="section-title">Ready to clear the floor?</h2>
+      <p>Whether you're outfitting a single room or an entire facility, we'd love to help. Fill out the form below and we'll get back to you.</p>
+      <div class="quote-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="qf-name">Name *</label>
+            <input type="text" id="qf-name" required placeholder="Your name">
+          </div>
+          <div class="form-group">
+            <label for="qf-email">Email *</label>
+            <input type="email" id="qf-email" required placeholder="you@email.com">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="qf-phone">Phone</label>
+            <input type="tel" id="qf-phone" placeholder="(555) 555-5555">
+          </div>
+          <div class="form-group">
+            <label for="qf-type">I'm interested for…</label>
+            <select id="qf-type">
+              <option value="home">Home / Personal use</option>
+              <option value="facility">Clinical facility</option>
+              <option value="bulk">Bulk / Distributor</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="qf-msg">Message</label>
+          <textarea id="qf-msg" placeholder="Tell us about your setup — room count, tubing length, anything helpful."></textarea>
+        </div>
+        <div class="form-submit">
+          <button type="button" class="btn btn-primary" onclick="submitQuote()">Get a Quote</button>
+        </div>
+        <p class="form-note">We typically respond within one business day.</p>
+      </div>
+      <div class="contact-row" style="margin-top:32px;">
+        <div class="contact-detail">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <a href="tel:9412843458">(941) 284-3458</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <p>&copy; 2025 <span class="brand brand-light"><span class="brand-air">airlift</span> <span class="brand-o2">O₂</span></span>. All rights reserved. Patent Pending.</p>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+
+<script>
+// Email obfuscation — assembled at runtime, never in source as plain text
+function _e(){var a=['a','b','e'];var b=['@'];var c=['a','i','r','l','i','f','t','o','2'];var d=['.','c','o','m'];return a.join('')+b[0]+c.join('')+d.join('');}
+
+function submitQuote(){
+  var n=document.getElementById('qf-name').value.trim();
+  var e=document.getElementById('qf-email').value.trim();
+  var p=document.getElementById('qf-phone').value.trim();
+  var t=document.getElementById('qf-type');
+  var tVal=t.options[t.selectedIndex].text;
+  var m=document.getElementById('qf-msg').value.trim();
+  if(!n||!e){alert('Please fill in your name and email.');return;}
+  var subj=encodeURIComponent('AirLift O2 Quote Request — '+n);
+  var body=encodeURIComponent(
+    'Name: '+n+'\n'+
+    'Email: '+e+'\n'+
+    'Phone: '+(p||'Not provided')+'\n'+
+    'Interest: '+tVal+'\n\n'+
+    'Message:\n'+(m||'No additional message.')
+  );
+  window.location.href='mail'+'to:'+_e()+'?subject='+subj+'&body='+body;
+}
+</script>
+</body>
+</html>
