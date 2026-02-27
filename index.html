@@ -636,8 +636,32 @@
   }
 
   @media (max-width: 640px) {
-    .nav-links { display: none; }
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0; right: 0;
+      background: var(--white);
+      flex-direction: column;
+      padding: 16px 24px 24px;
+      gap: 0;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+    .nav-links.open { display: flex; }
+    .nav-links a {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--ice);
+      font-size: 1rem;
+    }
+    .nav-links a:last-child { border-bottom: none; }
+    .nav-links .btn-nav {
+      margin-top: 8px;
+      text-align: center;
+    }
     .mobile-toggle { display: flex; }
+    .mobile-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .mobile-toggle.active span:nth-child(2) { opacity: 0; }
+    .mobile-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
     .hero { padding: 100px 20px 60px; min-height: auto; }
     .hero-logo { width: 242px; }
     section { padding: 72px 20px; }
@@ -687,7 +711,9 @@
 <nav id="nav">
   <div class="nav-inner">
     <div class="nav-logo">
-      <img src="images/logo-nav.svg" alt="AirLift O2">
+      <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
+        <img src="images/logo-nav.svg" alt="AirLift O2">
+      </a>
     </div>
     <div class="nav-links">
       <a href="#problem">The Problem</a>
@@ -1004,6 +1030,21 @@
     });
   }, { threshold: 0.15 });
   reveals.forEach(el => observer.observe(el));
+
+  // Mobile menu toggle
+  const mobileToggle = document.querySelector('.mobile-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  mobileToggle.addEventListener('click', () => {
+    mobileToggle.classList.toggle('active');
+    navLinks.classList.toggle('open');
+  });
+  // Close menu when a link is tapped
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileToggle.classList.remove('active');
+      navLinks.classList.remove('open');
+    });
+  });
 
   // Smooth scroll for anchor links
   document.querySelectorAll('a[href^="#"]').forEach(a => {
