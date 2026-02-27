@@ -1,4 +1,4 @@
-# AirLift O₂ — Website
+# airlift O₂ — Website
 
 Landing page for AirLift O₂, a ceiling-mounted track system that keeps medical oxygen tubing off the floor.
 
